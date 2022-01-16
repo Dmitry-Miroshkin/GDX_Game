@@ -26,8 +26,8 @@ public class Starter extends ApplicationAdapter {
 
         List<Panzer> newEnemies = IntStream.range(0, 15)
                 .mapToObj(i -> {
-                    int x = MathUtils.random(Gdx.graphics.getWidth());
-                    int y = MathUtils.random(Gdx.graphics.getHeight());
+                    int x = MathUtils.random(Gdx.graphics.getWidth()- 32);
+                    int y = MathUtils.random(Gdx.graphics.getHeight() - 32);
 
                     return new Panzer(x, y, "panzer_enemy.png");
                 }).collect(Collectors.toList());
