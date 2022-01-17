@@ -16,7 +16,11 @@ public class Starter extends ApplicationAdapter {
 
     Panzer me;
     private final List<Panzer> enemies = new ArrayList<>();
-    private final KeyboardAdapter inputProcessor = new KeyboardAdapter();
+    private final KeyboardAdapter inputProcessor ;
+    private MessageSender messageSender;
+    public Starter(InputState inputState) {
+        this.inputProcessor = new KeyboardAdapter(inputState);
+    }
 
     @Override
     public void create() {
@@ -52,5 +56,16 @@ public class Starter extends ApplicationAdapter {
     public void dispose() {
         batch.dispose();
         me.dispose();
+    }
+
+    public void setMessageSender(MessageSender messageSender) {
+        this.messageSender = messageSender;
+    }
+
+    public void handleTimer() {
+        if (inputProcessor != null){
+            InputState playerState = inputProcessor.updateAndGetState(me.getOrigin());
+            messageSender.sendMessage(playerState);
+        }
     }
 }
